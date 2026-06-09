@@ -20,45 +20,111 @@ By replacing traditional file-system directory mapping wrappers (`s3fs`/`fsspec`
 
 ## Installation
 
-Install the package directly via pip:
+# Terrafox Data Lake
+
+A lightweight Python package for securely connecting to and streaming data from private MinIO-based data lake environments.
+
+## Installation
 
 ```bash
 pip install terrafox-datalake
+```
 
-Quick Start
-1. Connecting Natively via Interactive Prompt
-If no background credentials are found, calling connect() will safely prompt you for your data lake root credentials:
+## Quick Start
 
+### 1. Connecting Natively via Interactive Prompt
+
+If no background credentials are found, calling `connect()` will securely prompt you for your data lake credentials.
+
+```python
 import terrafox_datalake as dl
 
-# Initializes the data lake client context securely
+# Initialize the data lake client context securely
 dl.connect()
+```
 
-2. Silent Credentials Injection (Automated Workflows)
-For automated scripts, headless runners, or to bypass the interactive login prompt in Google Colab, cache your environment credentials right before initializing:
+---
 
+### 2. Silent Credentials Injection (Automated Workflows)
+
+For automated scripts, CI/CD pipelines, headless environments, or to bypass the interactive login prompt in Google Colab, set your credentials as environment variables before initializing the connection.
+
+```python
 import os
 import terrafox_datalake as dl
 
-# Pre-populate session data 
+# Pre-populate session credentials
 os.environ["MINIO_USER"] = "admin"
 os.environ["MINIO_PASSWORD"] = "your_secure_password"
-os.environ["MINIO_ENDPOINT"] = "[https://minio.terrafoxai.com](https://minio.terrafoxai.com)" # Target endpoint
+os.environ["MINIO_ENDPOINT"] = "https://minio.terrafoxai.com"
 
+# Initialize the connection
 dl.connect()
-3 Advanced Usage: Reusing for Different Infrastructures
-This package is completely dynamic. You can reuse the exact same library to switch contexts between production clusters, staging buckets, or local development environments instantly:
+```
 
+---
+
+### 3. Advanced Usage: Connecting to Different Infrastructures
+
+Terrafox Data Lake is designed to be dynamic and reusable. Switch seamlessly between production environments, staging clusters, or local development instances.
+
+```python
 import terrafox_datalake as dl
 
-# Explicitly override destination to an alternate cluster or local port mapping
-dl.connect(endpoint="[https://local-testing-cluster.local:9000](https://local-testing-cluster.local:9000)")
+# Connect to an alternate cluster or local MinIO instance
+dl.connect(endpoint="https://local-testing-cluster.local:9000")
 
-# Pull rows out of an completely separate infrastructure target
-df = dl.read_csv(bucket="test-bucket", key="metrics.csv")
+# Read data from a different environment
+df = dl.read_csv(
+    bucket="test-bucket",
+    key="metrics.csv"
+)
+```
 
-Architecture Requirements
+---
 
-Python: >= 3.7
+## Example: Reading Data from a Data Lake
 
-Dependencies: pandas, boto3
+```python
+import terrafox_datalake as dl
+
+dl.connect()
+
+df = dl.read_csv(
+    bucket="bigdata",
+    key="vehicles.csv"
+)
+
+print(df.head())
+```
+
+---
+
+## Architecture Requirements
+
+* **Python:** 3.7 or higher
+* **Supported Storage:** MinIO (S3-compatible object storage)
+
+### Dependencies
+
+* pandas
+* boto3
+* s3fs
+* fsspec
+
+---
+
+## Features
+
+* Secure interactive authentication
+* Environment variable support for automation
+* Native MinIO integration
+* S3-compatible object storage access
+* Simple DataFrame-based data retrieval
+* Flexible infrastructure switching between environments
+
+---
+
+## License
+
+MIT License
