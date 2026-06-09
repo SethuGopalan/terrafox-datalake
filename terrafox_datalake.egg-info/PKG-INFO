@@ -1,0 +1,24 @@
+Metadata-Version: 2.4
+Name: terrafox-datalake
+Version: 0.1.2
+Summary: Automated connector wrapper for streaming data securely from a private MinIO Data Lake
+Author: Sethu Gopalan
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: pandas
+Requires-Dist: fsspec==2025.3.0
+Requires-Dist: s3fs==2025.3.0
+Requires-Dist: boto3<1.42
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Terrafox Data Lake Connector
+A simple, secure wrapper module to stream files out of your private data lake into remote notebook runtimes seamlessly.

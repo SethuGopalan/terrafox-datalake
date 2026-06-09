@@ -1,0 +1,8 @@
+README.md
+setup.py
+terrafox_datalake/__init__.py
+terrafox_datalake.egg-info/PKG-INFO
+terrafox_datalake.egg-info/SOURCES.txt
+terrafox_datalake.egg-info/dependency_links.txt
+terrafox_datalake.egg-info/requires.txt
+terrafox_datalake.egg-info/top_level.txt
