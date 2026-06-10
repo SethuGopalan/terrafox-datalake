@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: terrafox-datalake
-Version: 0.1.5
+Version: 0.1.6
 Summary: Automated connector wrapper for streaming data securely from a private MinIO Data Lake
 Author: Sethu Gopalan
 Classifier: Programming Language :: Python :: 3

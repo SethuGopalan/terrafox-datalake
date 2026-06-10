@@ -1,7 +1,7 @@
 import os
 import getpass
 import pandas as pd
-
+import s3fs
 DEFAULT_ENDPOINT = "https://minio.terrafoxai.com"
 
 # Module-level state tracking
@@ -62,3 +62,36 @@ def read_csv(bucket, key, **kwargs):
     },
     **kwargs
 )
+
+
+def ls(path=""):
+    """
+    List files and directories in the data lake.
+
+    Examples:
+        dl.ls()
+        dl.ls("Data")
+        dl.ls("Data/Clinical Data")
+    """
+    global _user, _password, _endpoint
+
+    if not _user or not _password:
+        connect()
+
+    fs = s3fs.S3FileSystem(
+        key=_user,
+        secret=_password,
+        client_kwargs={
+            "endpoint_url": _endpoint
+        },
+        config_kwargs={
+            "signature_version": "s3v4"
+        }
+    )
+
+    bucket_path = "bigdata"
+
+    if path:
+        bucket_path += f"/{path.strip('/')}"
+
+    return fs.ls(bucket_path)

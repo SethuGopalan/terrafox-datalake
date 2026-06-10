@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="terrafox-datalake", 
-    version="0.1.5",
+    version="0.1.6",
     author="Sethu Gopalan",
     description="Automated connector wrapper for streaming data securely from a private MinIO Data Lake",
     long_description=open("README.md").read(),
